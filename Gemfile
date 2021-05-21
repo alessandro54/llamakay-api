@@ -31,6 +31,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 5.0.0'
   gem 'database_cleaner-active_record'
   gem 'factory_bot'
+  gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+  gem 'shoulda-matchers', '~> 4.0'
 end
 
 group :development do
