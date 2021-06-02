@@ -8,6 +8,6 @@ RSpec.describe Recruiter, type: :model do
   end
 
   describe 'validations' do
-    it { should validate_presence_of(:email) }
+    it { should validate_presence_of(:company_id) }
   end
 end

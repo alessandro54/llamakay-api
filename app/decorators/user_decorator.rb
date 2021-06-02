@@ -1,20 +1,30 @@
+# frozen_string_literal: true
+
 class UserDecorator < Draper::Decorator
   delegate_all
 
   def professional?
-    return self.role == 'professional' && self.company_id.nil?
+    role == 'professional' && company_id.nil?
   end
 
   def recruiter?
-    !self.professional?
+    !professional?
+  end
+
+  def fresh!
+    {
+      first_name: first_name,
+      last_name: last_name,
+      token: auth_token
+    }
   end
 
   def sanitize!
-    if self.professional?
+    if professional?
       self.bio = ''
       self.experience = ''
       self.education = ''
     end
-    self.as_json.compact
+    as_json.compact
   end
 end

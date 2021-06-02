@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-
   # Validations
   validates :email, :first_name, :last_name, :auth_token, :role, presence: true
-  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP },
+                    uniqueness: { message: 'Email Address Already Taken'}
   validates_format_of :first_name, :last_name, with: /\A[^0-9`!@#$%^&*+_=]+\z/
   # Callbacks
   after_initialize :generate_auth_token
