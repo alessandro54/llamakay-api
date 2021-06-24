@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Recruiter < User
+  default_scope { where.not(company_id: nil) }
   # Relations
   belongs_to :company
   # Validations

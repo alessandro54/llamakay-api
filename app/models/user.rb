@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  has_secure_password
   # Validations
-  validates :email, :first_name, :last_name, :auth_token, :role, presence: true
+  validates :email, :first_name, :last_name, :auth_token, :role, :password, presence: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP },
-                    uniqueness: { message: 'Email Address Already Taken'}
+                    uniqueness: { message: 'Email Address Already Taken' }
   validates_format_of :first_name, :last_name, with: /\A[^0-9`!@#$%^&*+_=]+\z/
+  # validates :password, format: { with: /\A(?=.{8,})(?=.*\d)(?=.*[a=Z])(?=.*[A-Z])(?=.*[[:^alnum:]])/x}
   # Callbacks
   after_initialize :generate_auth_token
 
@@ -14,4 +16,5 @@ class User < ApplicationRecord
   def generate_auth_token
     self.auth_token = TokenGenerationService.generate unless auth_token.present?
   end
+
 end

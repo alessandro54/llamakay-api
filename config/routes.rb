@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :job_applications
+  resources :jobs
   root 'root#index'
   get '/health', to: 'health#health'
 
