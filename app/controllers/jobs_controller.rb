@@ -1,20 +1,18 @@
 # frozen_string_literal: true
 
 class JobsController < ApplicationController
+  before_action :authenticate_user!, only: %i[index show update delete]
   before_action :set_job, only: %i[show update destroy]
 
   # GET /jobs
-  # GET /jobs.json
   def index
     @jobs = Job.all
   end
 
   # GET /jobs/1
-  # GET /jobs/1.json
   def show; end
 
   # POST /jobs
-  # POST /jobs.json
   def create
     @job = Job.new(job_params)
 
@@ -26,7 +24,6 @@ class JobsController < ApplicationController
   end
 
   # PATCH/PUT /jobs/1
-  # PATCH/PUT /jobs/1.json
   def update
     if @job.update(job_params)
       render :show, status: :ok, location: @job
@@ -36,7 +33,6 @@ class JobsController < ApplicationController
   end
 
   # DELETE /jobs/1
-  # DELETE /jobs/1.json
   def destroy
     @job.destroy
   end
