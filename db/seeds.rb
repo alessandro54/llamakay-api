@@ -11,4 +11,4 @@ FactoryBot.create_list(:professional, 10)
 puts 'Creating Jobs'
 FactoryBot.create_list(:job, 100)
 puts 'Creating Applications'
-FactoryBot.create_list(:job_application, 1000)
+FactoryBot.create_list(:job_application, 100)

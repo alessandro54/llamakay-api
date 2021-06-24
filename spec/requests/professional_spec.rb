@@ -28,13 +28,15 @@ RSpec.describe 'Professional:', type: :request do
       end
       context 'payload' do
         subject { response.body }
-        it { is_expected.to include('unauthorized') }
+        it { is_expected.to include('You must provide a valid token') }
       end
     end
   end
 
   # CREATE
-  let!(:create_params) { { 'user': { first_name: 'Renzo', last_name: 'Palacios', email: 'chutra@gmail.com' } } }
+  let!(:create_params) do
+    { 'user': { first_name: 'Renzo', last_name: 'Palacios', email: 'chutra@gmail.com', password: 'Chutra12345!' } }
+  end
   let!(:repeated_create_params) do
     { 'user': { first_name: 'Renzo', last_name: 'Palacios', email: 'chutra@gmail.com' } }
   end
