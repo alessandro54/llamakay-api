@@ -11,6 +11,10 @@ class UserDecorator < Draper::Decorator
     !professional?
   end
 
+  def admin?
+    role == 'admin'
+  end
+
   def fresh!
     {
       first_name: first_name,
