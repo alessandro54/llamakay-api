@@ -1,1 +1,3 @@
-json.partial! "applications/job_application", job_application: @job_application
+# frozen_string_literal: true
+
+json.partial! 'applications/application', application: @application

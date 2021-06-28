@@ -8,11 +8,11 @@ class JobsController < ApplicationController
     if Session.user.company_id.present?
       @jobs = UserService.company_jobs
     else
-      render json: { message: 'You are not a Recruiter'}, status: :forbidden
+      render json: { message: 'You are not a Recruiter' }, status: :forbidden
     end
   end
 
-  def show;end
+  def show; end
 
   def create
     @job = Job.new(job_params)
@@ -48,8 +48,7 @@ class JobsController < ApplicationController
 
   def belongs_to_company?
     unless UserService.belongs_to_company?(@job)
-      render json: { message: 'You must belong to that company to see that'}, status: :forbidden
+      render json: { message: 'You must belong to that company to see that' }, status: :forbidden
     end
   end
-
 end
