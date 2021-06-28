@@ -11,21 +11,12 @@ class UserService
     raise 'Unauthorized'
   end
 
-  def self.login(email)
-    User.find_by_email(email).update_column :auth_token, TokenGenerationService.generate
-  end
-
-  def self.logout
-    User.find(Session.user).update_column :auth_token, nil
-  end
-
   def self.company_jobs
     @company_jobs = Company.find(Session.user.company_id).jobs
   end
 
   def self.belongs_to_company?(job)
-    true if Session.user.company_id == job.company_id
-    false
+    Session.user.company_id == job.company_id
   end
-  
+
 end

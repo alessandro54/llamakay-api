@@ -15,6 +15,16 @@ ActiveRecord::Schema.define(version: 2021_06_21_194134) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "applications", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "job_id", null: false
+    t.json "custom_answers"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["job_id"], name: "index_applications_on_job_id"
+    t.index ["user_id"], name: "index_applications_on_user_id"
+  end
+
   create_table "companies", force: :cascade do |t|
     t.string "name"
     t.string "web_page"
@@ -24,20 +34,10 @@ ActiveRecord::Schema.define(version: 2021_06_21_194134) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "job_applications", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "job_id", null: false
-    t.json "custom_answers"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["job_id"], name: "index_job_applications_on_job_id"
-    t.index ["user_id"], name: "index_job_applications_on_user_id"
-  end
-
   create_table "jobs", force: :cascade do |t|
     t.bigint "company_id", null: false
     t.text "description"
-    t.string "seniority"
+    t.integer "seniority"
     t.boolean "active"
     t.json "custom_questions"
     t.datetime "created_at", precision: 6, null: false
@@ -61,8 +61,8 @@ ActiveRecord::Schema.define(version: 2021_06_21_194134) do
     t.index ["company_id"], name: "index_users_on_company_id"
   end
 
-  add_foreign_key "job_applications", "jobs"
-  add_foreign_key "job_applications", "users"
+  add_foreign_key "applications", "jobs"
+  add_foreign_key "applications", "users"
   add_foreign_key "jobs", "companies"
   add_foreign_key "users", "companies"
 end

@@ -17,4 +17,7 @@ class User < ApplicationRecord
     self.auth_token = TokenGenerationService.generate unless auth_token.present?
   end
 
+  def refresh_auth_token
+    update_column :auth_token, TokenGenerationService.generate
+  end
 end

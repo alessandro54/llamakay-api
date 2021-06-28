@@ -1,22 +1,22 @@
 # frozen_string_literal: true
 
-class JobApplicationsController < ApplicationController
+class ApplicationsController < ApplicationController
   before_action :set_job_application, only: %i[show update destroy]
 
-  # GET /job_applications
-  # GET /job_applications.json
+  # GET /applications
+  # GET /applications.json
   def index
-    @job_applications = JobApplication.all
+    @job_applications = Application.all
   end
 
-  # GET /job_applications/1
-  # GET /job_applications/1.json
+  # GET /applications/1
+  # GET /applications/1.json
   def show; end
 
-  # POST /job_applications
-  # POST /job_applications.json
+  # POST /applications
+  # POST /applications.json
   def create
-    @job_application = JobApplication.new(job_application_params)
+    @job_application = Application.new(job_application_params)
 
     if @job_application.save
       render :show, status: :created, location: @job_application
@@ -25,8 +25,8 @@ class JobApplicationsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /job_applications/1
-  # PATCH/PUT /job_applications/1.json
+  # PATCH/PUT /applications/1
+  # PATCH/PUT /applications/1.json
   def update
     if @job_application.update(job_application_params)
       render :show, status: :ok, location: @job_application
@@ -35,8 +35,8 @@ class JobApplicationsController < ApplicationController
     end
   end
 
-  # DELETE /job_applications/1
-  # DELETE /job_applications/1.json
+  # DELETE /applications/1
+  # DELETE /applications/1.json
   def destroy
     @job_application.destroy
   end
@@ -45,11 +45,11 @@ class JobApplicationsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_job_application
-    @job_application = JobApplication.find(params[:id])
+    @job_application = Application.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
   def job_application_params
-    params.require(:job_application).permit(:user_id, :job_id, :custom_answers)
+    params.require(:application).permit(:user_id, :job_id, :custom_answers)
   end
 end
