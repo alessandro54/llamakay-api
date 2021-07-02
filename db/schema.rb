@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2021_06_21_194134) do
   create_table "jobs", force: :cascade do |t|
     t.bigint "company_id", null: false
     t.text "description"
+    t.string "title"
     t.integer "seniority"
     t.boolean "active"
     t.json "custom_questions"

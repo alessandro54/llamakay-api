@@ -1,15 +1,11 @@
 # frozen_string_literal: true
 
 class JobsController < ApplicationController
-  before_action :authenticate_user!, only: %i[index show update destroy]
-  before_action :set_job, :belongs_to_company?, only: %i[show update destroy]
+  before_action :authenticate_user!, only: %i[index update destroy]
+  before_action :set_job, only: %i[show update destroy]
 
   def index
-    if Session.user.company_id.present?
-      @jobs = UserService.company_jobs
-    else
-      render json: { message: 'You are not a Recruiter' }, status: :forbidden
-    end
+    @jobs = Job.all
   end
 
   def show; end

@@ -1,3 +1,3 @@
-json.company_jobs do
-    json.array! @jobs, partial: "jobs/job", as: :job
-end
+# frozen_string_literal: true
+
+json.array! @jobs, partial: 'jobs/job', as: :job

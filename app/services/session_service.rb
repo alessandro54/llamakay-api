@@ -1,13 +1,10 @@
 # frozen_string_literal: true
 
 class SessionService
-
   def self.login(params)
-    if params[:email].present? && params[:password].present?
-      User.find_by_email(params[:email]).authenticate(params[:password])
-    else
-      false
-    end
+    User.find_by_email(params[:email]).authenticate(params[:password])
+  rescue StandardError
+    false
   end
 
   def self.logout
